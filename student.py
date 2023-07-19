@@ -1,26 +1,56 @@
 from enum import Enum
 
+import student
+from warning import Warning
+from update import Update
+from enum import Enum
+
+
 class Pronoun(Enum):
     HE = "HE"
     SHE = "SHE"
     NA = "N/A"
 
+
+warning = Warning()
+update = Update()
+
+
 class Student:
-    def __init__(student, name:str, birthday:str=None, pronoun:Pronoun=None):
-        student.courseTerm = None
-        student.name = name
-        student.birthday = birthday
-        student.pronoun = pronoun
-        student.courseHistory = None
+    def __init__(self, name: str, birthday: str = None, pronoun: Pronoun = None):
+        self.courseTerm = None
+        self.name = name
+        self.phoneNumber = None
+        self.email = None
+        self.birthday = birthday
+        self.pronoun = pronoun
+        self.courseHistory = None
 
-    def addPhoneNumber(self, phoneNumber):
-        self.phoneNumber = phoneNumber
+    def editPhoneNumber(self, phoneNumber:int):
+        PHONENUM = "phone number"
+        val = False
 
-    def addEmail(self,email):
+        if self.phoneNumber is None:
+            self.phoneNumber = phoneNumber
+            val = True
+
+        else:
+            val = warning.displayWarning("w001", PHONENUM)
+            if val is True:
+                self.phoneNumber = phoneNumber
+                val = True
+            else:
+                val = False
+
+        update.displayUpdate(val, self.name, PHONENUM, self.phoneNumber)
+
+    def editEmail(self, email):
+        if self.email is not None:
+            val = warning.displayWarning("w001", "email")
+            if val == 1:
+                return
         self.email = email
 
-    def newCourseHistory(self, courseTerm):
+    def course(self, courseTerm):
         self.courseHistory = []
         self.courseTerm = courseTerm
-        
-        
