@@ -20,11 +20,11 @@ class Term(Enum):
     WINTER = "WINTER"
 
 
-class Subject(Enum):
+class Course(Enum):
     MATH = "MATH"
     SCIENCE = "SCIENCE"
     ENGLISH = "ENGLISH"
-
+    CS = "COMPUTER SCIENCE"
 
 class WarningId(Enum):
     WARNING_1 = "w001"
