@@ -1,19 +1,13 @@
-from enum import Enum
-
-import student
-from warning import Warning
+import problem
+from constants import WarningId, ErrorId, Pronoun
+from problem import Problem
 from update import Update
-from enum import Enum
 
 
-class Pronoun(Enum):
-    HE = "HE"
-    SHE = "SHE"
-    NA = "N/A"
-
-
-warning = Warning()
-update = Update()
+PHONENUM = "phone number"
+EMAIL = "email"
+SET = "set"
+GET = "get"
 
 
 class Student:
@@ -21,35 +15,53 @@ class Student:
         self.courseTerm = None
         self.name = name
         self.phoneNumber = None
-        self.email = None
+        self.emailadr = None
         self.birthday = birthday
         self.pronoun = pronoun
         self.courseHistory = None
 
-    def editPhoneNumber(self, phoneNumber:int):
-        PHONENUM = "phone number"
+    """
+    Method to add phone number.
+    Warning and update messages depending on return for bool in val.
+    """
+    def phone_number(self, command:str=GET, number:str=None):
         val = False
-
-        if self.phoneNumber is None:
-            self.phoneNumber = phoneNumber
-            val = True
-
-        else:
-            val = warning.displayWarning("w001", PHONENUM)
-            if val is True:
-                self.phoneNumber = phoneNumber
+        if command.lower() == SET:
+            if self.phoneNumber is None:
+                self.phoneNumber = number
                 val = True
             else:
-                val = False
+                val = Problem().displayWarning(WarningId.WARNING_1, PHONENUM)
+                if val is True:
+                    self.phoneNumber = number
+            Update().displayUpdate(val, self.name, PHONENUM, self.phoneNumber)
 
-        update.displayUpdate(val, self.name, PHONENUM, self.phoneNumber)
+        elif command.lower() == GET:
+            if self.phoneNumber is None:
+                Problem().displayError(ErrorId.ERROR_1, PHONENUM)
+            return self.phoneNumber
 
-    def editEmail(self, email):
-        if self.email is not None:
-            val = warning.displayWarning("w001", "email")
-            if val == 1:
-                return
-        self.email = email
+
+    """
+    Method to add email.
+    Warning and update messages depending on return for bool in val.
+    """
+    def email(self, command:str=GET, emailadr:str=None):
+        val = False
+        if command.lower() == SET:
+            if self.emailadr is None:
+                self.emailadr = emailadr
+                val = True
+            else:
+                val = Problem.displayWarning(WarningId.WARNING_1, EMAIL)
+                if val is True:
+                    self.emailadr = emailadr
+            Update.displayUpdate(val, self.name, EMAIL, self.emailadr)
+
+        elif command.lower() == GET:
+            return self.emailadr
+
+
 
     def course(self, courseTerm):
         self.courseHistory = []

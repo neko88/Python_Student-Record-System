@@ -1,17 +1,4 @@
-from enum import Enum
-
-class Term(Enum):
-    SPRING = "SPRING"
-    SUMMER = "SUMMER"
-    FALL = "FALL"
-    WINTER = "WINTER"
-
-
-class Subject(Enum):
-    MATH = "MATH"
-    SCIENCE = "SCIENCE"
-    ENGLISH = "ENGLISH"
-
+from constants import Subject, Term
 
 class Course:
     def __init__(self, id:int, name:str, subject:Subject, professorName:str=None, term:Term=None):

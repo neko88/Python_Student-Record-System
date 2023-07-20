@@ -1,14 +1,4 @@
-from course import Term
-from course import Subject
-from enum import Enum
-
-class Grade(Enum):
-    A = "A"
-    B = "B"
-    C = "C"
-    D = "D"
-    E = "E"
-    F = "F"
+from constants import Grade, Term
 
 class Grade:
     def __init__(course, term:Term, year, grade:Grade):
