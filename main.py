@@ -4,9 +4,18 @@ Main module to control the system.
 
 from student import Student
 from constants import Course, Term, Grade
+import mysql.connector
+from tkinter import *
 
 SET = "set"
 GET = "get"
+
+connectiondb = mysql.connector.connect(host="localhost",user="root",passwd="",database="studentrecorddb")
+if connectiondb:
+    print("Successfully connected to the database.")
+else:
+    print("Error connecting to the database.")
+cursordb = connectiondb.cursor()
 
 student1 = Student("Pat")
 student1.phone_number(SET, "99-0392")
