@@ -21,7 +21,7 @@ class Student:
         self.emailadr = None
         self.birthday = birthday
         self.pronoun = pronoun
-        self.courseRecordList = []
+        self.courseRecordList:CourseRecord = []
 
     """
      Method to SET or GET phone number.
@@ -96,4 +96,3 @@ class Student:
                     if year == rec.year:
                         print(f"..[Grade Record: {self.name}] {rec.course.value} {term.value} {year}: {rec.grade.value}")
                         return rec.grade.value
-
